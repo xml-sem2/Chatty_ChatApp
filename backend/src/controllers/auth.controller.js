@@ -53,7 +53,7 @@ export const signup =async (req, res) => {
 
 
 export const login = async (req, res) => {
-    const {email, passwordddwdww} = req.body;
+    const {email, password} = req.body;
     try
     {
         const user = await User.findOne({email});
@@ -66,13 +66,13 @@ export const login = async (req, res) => {
         {
             return res.status(400).json({message:"Invalid credentials"});    
         }
-        generateToken(user,_id. res);
+        generateToken(user._id,res);
 
-        res.status(200).jason({
+        res.status(200).json({
             _id: user._id,
             fullName: user.fullName,
             email: user.email,
-            profilePic: user.profilePic
+            profilePic: user.profilePic,
         });
     }
     catch(error)
@@ -87,10 +87,15 @@ export const logout = (req, res) => {
     try{
         res.cookie("jwt", "", {maxAge:0});
         res.status(200).json({message: "Logged out successfully"});      
-    }
+    }  
     catch(error)
     {
         console.log("Error in logout controller", error.message);
         res.status(500).json({message: "Internal Server Error"});
     }
 };
+
+export const updateProfile = async(req, res) =>
+{
+    
+}
