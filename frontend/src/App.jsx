@@ -9,10 +9,11 @@ import SettingsPage from './pages/SettingsPage';
 import SignUpPage from './pages/SignUpPage';
 
 import { Routes, Route } from "react-router-dom";
-import { axiosInstance } from './lib/axios';
-
+//import { axiosInstance } from './lib/axios';
+import { useAuthStore } from './store/useAuthStore';
 const App = () => {
-  axiosInstance
+  const {authUser}=useAuthStore()
+  //axiosInstance
   return (
     <div>
       
