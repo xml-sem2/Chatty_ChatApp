@@ -12,6 +12,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import {Loader} from "lucide-react";
 import { useAuthStore } from './store/useAuthStore';
+import {Toaster} from "react-hot-toast";
 const App = () => {
   const {authUser,checkAuth,isCheckingAuth}=useAuthStore();
   useEffect(() => {
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/profle" element={authUser ? <ProfilePage />: <Navigate to ="/login"/>} />
       </Routes>
 
+     <Toaster/>
     </div>
   )
 }
