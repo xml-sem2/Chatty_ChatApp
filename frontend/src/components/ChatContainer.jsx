@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import ChatHeader from './ChatHeader';
 import MessageInput from './MessageInput';
 import { useAuthStore } from '../store/useAuthStore';
+import { formatMessageTime } from '../lib/utils';
 const ChatContainer = () => {
   const {messages, getMessages,isMessageLoading,selectedUser} = useChatStore();
   const{ authUser }=useAuthStore()
@@ -35,7 +36,8 @@ const ChatContainer = () => {
               </div>
              </div>
              <div className="chat-header mb-1">
-              <time className="text-xs opacity-50 ml-1"> {message.createdAt}</time>
+              <time className="text-xs opacity-50 ml-1">
+                 {formatMessageTime(message.createdAt)}</time>
               </div>
               <div className="chat-bubble flex">
                 {
