@@ -11,12 +11,21 @@ const io = new Server(server, {
     origin: ["http://localhost:5173"],
   },
 });
+// used to store online user
+const userSocketMap={};//{user id :socketId}
 
 io.on("connection", (socket) => {
   console.log("A user Connected", socket.id);
 
+   const userId=socket.handshake.query.userId
+   if(userId)
+     userSocketMap[userId]=socket.id
+   
+   io.emit("getOnlineUser",Object.keys(userSocketMap));
   socket.on("disconnect", () => {
     console.log("A user disconnected ", socket.id);
+    delete userSocketMap[userId];
+    io.emit("getOnlineUser",Object.keys(userSocketMap));
   });
 });
 export { io, app, server };
